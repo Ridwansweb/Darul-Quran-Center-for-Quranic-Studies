@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Darul Qur'an Centre — Online Tahfidhul Qur'an Class</title>
+<meta name="description" content="Live, teacher-led online Qur'an memorization (Tahfidh), Tajweed, Tawheed and Arabic classes for students in the UK, Uganda, Ghana, Turkey, Morocco, Egypt, Nigeria, Canada and beyond.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#122522;
+    --teal:#164A42;
+    --teal-deep:#0D332E;
+    --gold:#C69A44;
+    --gold-soft:#E4C77E;
+    --maroon:#5C1B34;
+    --ivory:#FBF7EE;
+    --sand:#F0E6D2;
+    --line:rgba(18,37,34,0.14);
+    --radius:14px;
+    --max:1180px;
+    font-size:16px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:'Work Sans', system-ui, sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', Georgia, serif;
+    color:var(--teal-deep);
+    margin:0 0 0.5em;
+    line-height:1.12;
+    font-weight:600;
+  }
+
+  .arabic{
+    font-family:'Amiri', serif;
+    direction:rtl;
+  }
+
+  a{color:var(--teal-deep);}
+  img,svg{display:block; max-width:100%;}
+
+  .skip-link{
+    position:absolute; left:-999px; top:auto;
+    background:var(--gold); color:var(--ink); padding:0.75em 1.25em;
+    border-radius:0 0 8px 0; z-index:1000; font-weight:600;
+  }
+  .skip-link:focus{ left:0; top:0; }
+
+  :focus-visible{
+    outline:3px solid var(--maroon);
+    outline-offset:3px;
+  }
+
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 clamp(1.25rem, 4vw, 2.5rem); }
+
+  /* ---------- Header ---------- */
+  header.site{
+    position:sticky; top:0; z-index:100;
+    background:rgba(251,247,238,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0.9rem 0;
+  }
+  .brand{
+    display:flex; align-items:center; gap:0.65rem;
+    text-decoration:none; color:var(--teal-deep);
+  }
+  .brand-mark{ width:34px; height:34px; flex-shrink:0; }
+  .brand-text{ font-family:'Fraunces', serif; font-weight:600; font-size:1.15rem; letter-spacing:0.01em; }
+  .brand-text small{ display:block; font-family:'Work Sans',sans-serif; font-weight:500; font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--maroon); margin-top:1px;}
+
+  nav.primary{ display:flex; gap:1.6rem; }
+  nav.primary a{
+    text-decoration:none; color:var(--ink); font-weight:500; font-size:0.92rem;
+    padding:0.4rem 0.1rem; border-bottom:2px solid transparent;
+  }
+  nav.primary a:hover, nav.primary a:focus-visible{ border-bottom-color:var(--gold); }
+  .nav-cta{
+    background:var(--maroon); color:var(--ivory) !important; padding:0.55rem 1.1rem !important;
+    border-radius:999px; border-bottom:none !important; font-size:0.85rem !important;
+  }
+  .nav-cta:hover{ background:#711F3E; }
+  .menu-toggle{ display:none; }
+
+  @media (max-width:760px){
+    nav.primary{
+      position:absolute; top:100%; left:0; right:0; flex-direction:column;
+      background:var(--ivory); padding:1rem clamp(1.25rem,4vw,2.5rem) 1.4rem;
+      border-bottom:1px solid var(--line);
+      display:none;
+      gap:0.9rem;
+    }
+    nav.primary.open{ display:flex; }
+    .menu-toggle{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:40px; height:40px; border-radius:8px; border:1px solid var(--line);
+      background:transparent; cursor:pointer;
+    }
+    .menu-toggle svg{ width:20px; height:20px; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(120% 140% at 85% -10%, rgba(198,154,68,0.22), transparent 55%),
+      linear-gradient(180deg, var(--teal-deep) 0%, var(--teal) 100%);
+    color:var(--ivory);
+  }
+  .hero-inner{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:2.5rem; align-items:center;
+    padding:clamp(3rem,7vw,5.5rem) 0 clamp(3.5rem,8vw,6rem);
+  }
+  @media (max-width:860px){ .hero-inner{ grid-template-columns:1fr; } }
+
+  .eyebrow-tag{
+    display:inline-block; background:rgba(228,199,126,0.18); color:var(--gold-soft);
+    border:1px solid rgba(228,199,126,0.4);
+    padding:0.35em 0.85em; border-radius:999px; font-size:0.78rem; letter-spacing:0.08em;
+    text-transform:uppercase; font-weight:600; margin-bottom:1.1rem;
+  }
+  .hero h1{
+    color:var(--ivory); font-size:clamp(2.1rem, 4.4vw, 3.4rem); margin-bottom:0.55em;
+  }
+  .hero h1 em{ font-style:normal; color:var(--gold-soft); }
+  .hero-arabic{ color:var(--gold-soft); font-size:1.35rem; margin-bottom:0.9rem; opacity:0.92;}
+  .hero p.lede{ font-size:1.08rem; max-width:46ch; color:rgba(251,247,238,0.88); }
+
+  .cta-row{ display:flex; gap:0.9rem; flex-wrap:wrap; margin-top:1.6rem; }
+  .btn{
+    display:inline-flex; align-items:center; gap:0.5rem;
+    padding:0.85em 1.4em; border-radius:999px; text-decoration:none;
+    font-weight:600; font-size:0.95rem; border:1px solid transparent;
+    transition:transform 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover{ transform:translateY(-1px); }
+  .btn-primary{ background:var(--gold); color:var(--teal-deep); }
+  .btn-primary:hover{ background:var(--gold-soft); }
+  .btn-ghost{ background:transparent; color:var(--ivory); border-color:rgba(251,247,238,0.5); }
+  .btn-ghost:hover{ background:rgba(251,247,238,0.1); }
+
+  .hero-motif{
+    position:relative; aspect-ratio:1/1; width:100%; max-width:360px; margin:0 auto;
+  }
+  .hero-motif svg{ width:100%; height:100%; }
+
+  /* ---------- Star pattern divider ---------- */
+  .star-divider{
+    display:flex; justify-content:center; gap:1.1rem; padding:1.6rem 0;
+    background:var(--ivory);
+  }
+  .star-divider svg{ width:18px; height:18px; opacity:0.55; }
+
+  /* ---------- Sections ---------- */
+  section{ padding:clamp(3rem,6vw,4.5rem) 0; }
+  .section-head{ max-width:62ch; margin-bottom:2.4rem; }
+  .section-head .kicker{
+    display:block; color:var(--maroon); font-weight:700; font-size:0.78rem;
+    letter-spacing:0.14em; text-transform:uppercase; margin-bottom:0.6em;
+  }
+  .section-head h2{ font-size:clamp(1.6rem,3vw,2.2rem); }
+  .section-head p{ color:#3B534E; font-size:1.02rem; }
+
+  .band-ivory{ background:var(--ivory); }
+  .band-sand{ background:var(--sand); }
+
+  /* About */
+  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start; }
+  @media (max-width:800px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-grid p{ color:#3B534E; }
+  .stat-list{ display:grid; gap:1.4rem; }
+  .stat{ border-left:3px solid var(--gold); padding-left:1rem; }
+  .stat b{ display:block; font-family:'Fraunces',serif; font-size:1.5rem; color:var(--teal-deep); }
+  .stat span{ font-size:0.9rem; color:#5A6E69; }
+
+  /* Curriculum */
+  .feature-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1.25rem;
+  }
+  @media (max-width:900px){ .feature-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:520px){ .feature-grid{ grid-template-columns:1fr; } }
+  .feature-card{
+    background:var(--ivory); border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.6rem 1.4rem;
+  }
+  .feature-card .icon{
+    width:38px; height:38px; margin-bottom:1rem; color:var(--maroon);
+  }
+  .feature-card h3{ font-size:1.05rem; margin-bottom:0.35em; }
+  .feature-card p{ font-size:0.9rem; color:#4A5F5A; margin:0; }
+
+  /* Countries / live clocks */
+  .clock-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;
+  }
+  @media (max-width:900px){ .clock-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .clock-grid{ grid-template-columns:1fr; } }
+  .clock-card{
+    background:var(--teal-deep); color:var(--ivory);
+    border-radius:var(--radius); padding:1.3rem 1.2rem;
+    display:flex; flex-direction:column; gap:0.15rem;
+    position:relative; overflow:hidden;
+  }
+  .clock-card::after{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(80% 80% at 100% 0%, rgba(198,154,68,0.25), transparent 60%);
+    pointer-events:none;
+  }
+  .clock-card .country{ font-weight:600; font-size:0.98rem; }
+  .clock-card .time{ font-family:'Fraunces',serif; font-size:1.65rem; color:var(--gold-soft); font-variant-numeric:tabular-nums; }
+  .clock-card .day{ font-size:0.78rem; color:rgba(251,247,238,0.7); }
+  .clock-note{ margin-top:1.5rem; font-size:0.88rem; color:#5A6E69; }
+
+  /* Schedule */
+  .schedule-panel{
+    background:var(--teal); color:var(--ivory);
+    border-radius:20px; padding:clamp(2rem,4vw,3rem); display:grid;
+    grid-template-columns:1fr 1fr; gap:2.5rem; align-items:center;
+  }
+  @media (max-width:800px){ .schedule-panel{ grid-template-columns:1fr; } }
+  .schedule-panel h2{ color:var(--ivory); }
+  .schedule-panel p{ color:rgba(251,247,238,0.85); }
+  .day-strip{ display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:1.2rem; }
+  .day-pill{
+    background:rgba(251,247,238,0.1); border:1px solid rgba(251,247,238,0.25);
+    padding:0.5em 1em; border-radius:999px; font-size:0.85rem; font-weight:600;
+  }
+  .day-pill.off{ opacity:0.35; }
+
+  /* Enroll */
+  .enroll-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:2.5rem; }
+  @media (max-width:800px){ .enroll-grid{ grid-template-columns:1fr; } }
+  .contact-card{
+    background:var(--ivory); border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.6rem;
+  }
+  .contact-list{ list-style:none; margin:0; padding:0; display:grid; gap:1rem; }
+  .contact-list a{
+    display:flex; align-items:center; gap:0.8rem; text-decoration:none; color:var(--ink);
+    font-weight:600; padding:0.7rem 0.9rem; border-radius:10px; border:1px solid var(--line);
+  }
+  .contact-list a:hover{ background:var(--sand); }
+  .contact-list svg{ width:20px; height:20px; color:var(--maroon); flex-shrink:0; }
+  .meet-link{ word-break:break-all; }
+
+  .join-form-note{
+    background:var(--sand); border-radius:var(--radius); padding:1.6rem;
+    font-size:0.95rem; color:#3B534E;
+  }
+  .join-form-note h3{ font-size:1.1rem; }
+
+  /* Footer */
+  footer{
+    background:var(--teal-deep); color:rgba(251,247,238,0.85);
+    padding:2.8rem 0 2rem; font-size:0.9rem;
+  }
+  .footer-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; }
+  footer .brand-text{ color:var(--ivory); }
+  footer a{ color:var(--gold-soft); }
+  .footer-bottom{
+    margin-top:2rem; padding-top:1.4rem; border-top:1px solid rgba(251,247,238,0.14);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.6rem;
+    font-size:0.8rem; color:rgba(251,247,238,0.55);
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a class="brand" href="#top">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <polygon points="20,2 24,14 36,14 26,21 30,34 20,26 10,34 14,21 4,14 16,14"
+          fill="none" stroke="#C69A44" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand-text">Darul Qur'an Centre<small>Tahfidhul Qur'an Program</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="primary" id="primaryNav" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#program">Program</a>
+      <a href="#countries">Countries</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#enroll" class="nav-cta">Enroll now</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="top">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow-tag">Online &middot; Monday to Thursday</span>
+        <p class="hero-arabic arabic" lang="ar">دار القرآن لتحفيظ القرآن الكريم</p>
+        <h1>Memorise the Qur'an, <em>from wherever you call home</em></h1>
+        <p class="lede">Join live classes with real teachers. Learn to memorise the Qur'an, recite it correctly, understand what it means, and read Arabic with confidence, no matter which country you call home.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://meet.google.com/gad-xegz-yfk">Join a class on Google Meet</a>
+          <a class="btn btn-ghost" href="https://wa.me/2349035068375" target="_blank" rel="noopener">Message us on WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero-motif" aria-hidden="true">
+        <svg viewBox="0 0 300 300">
+          <defs>
+            <linearGradient id="starGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#E4C77E"/>
+              <stop offset="100%" stop-color="#C69A44"/>
+            </linearGradient>
+          </defs>
+          <g transform="translate(150,150)">
+            <polygon points="0,-110 22,-45 90,-45 35,-5 55,60 0,20 -55,60 -35,-5 -90,-45 -22,-45"
+              fill="none" stroke="url(#starGrad)" stroke-width="2"/>
+            <polygon points="0,-110 22,-45 90,-45 35,-5 55,60 0,20 -55,60 -35,-5 -90,-45 -22,-45"
+              transform="rotate(20)" fill="none" stroke="rgba(228,199,126,0.35)" stroke-width="1.2"/>
+            <circle r="130" fill="none" stroke="rgba(228,199,126,0.25)" stroke-width="1"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="star-divider" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><polygon points="12,1 14.5,9 23,9 16,14 18.5,22 12,17 5.5,22 8,14 1,9 9.5,9" fill="#C69A44"/></svg>
+    <svg viewBox="0 0 24 24"><polygon points="12,1 14.5,9 23,9 16,14 18.5,22 12,17 5.5,22 8,14 1,9 9.5,9" fill="#5C1B34"/></svg>
+    <svg viewBox="0 0 24 24"><polygon points="12,1 14.5,9 23,9 16,14 18.5,22 12,17 5.5,22 8,14 1,9 9.5,9" fill="#C69A44"/></svg>
+  </div>
+
+  <section class="band-ivory" id="about" aria-labelledby="about-h">
+    <div class="wrap about-grid">
+      <div>
+        <span class="kicker">About the centre</span>
+        <h2 id="about-h">A home for memorisation, wherever your home is</h2>
+        <p>Darul Qur'an Centre runs a fully online Tahfidhul Qur'an program built for students all over the world. Our students live in different countries, work different hours, and start from different points in the Qur'an. That's why every student gets a teacher who follows their own pace, so a beginner and a returning hafidh can grow in the same program without either one being held back.</p>
+        <p>But memorising words is not enough on its own. That's why every student also learns Tajweed, so their recitation stays correct, and Tawheed, so they understand the meaning behind what they memorise. Add in basic Arabic, and the Qur'an stops being sounds to repeat and becomes a text you truly understand.</p>
+      </div>
+      <div class="stat-list" role="list" aria-label="Program facts">
+        <div class="stat" role="listitem"><b>4 days a week</b><span>Monday to Thursday, timed to your region</span></div>
+        <div class="stat" role="listitem"><b>8+ countries</b><span>UK, Uganda, Ghana, Turkey, Morocco, Egypt, Nigeria, Canada and more</span></div>
+        <div class="stat" role="listitem"><b>1:1 pacing</b><span>Personalised memorisation targets per student</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-sand" id="program" aria-labelledby="program-h">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">What's covered</span>
+        <h2 id="program-h">One program, four foundations</h2>
+        <p>Every class brings these four skills together. Memorisation is the goal, but the other three are what make it accurate, meaningful, and easy to carry with you for life.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 4v16l8-4 8 4V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2Z"/><path d="M12 4v14"/></svg>
+          <h3>Hifz &mdash; memorisation</h3>
+          <p>You get a clear daily portion to memorise, plus time to revise what you already know. New memorisation never pushes out the old.</p>
+        </div>
+        <div class="feature-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h16M4 6h10M4 18h7"/></svg>
+          <h3>Tajweed</h3>
+          <p>You learn the rules for reciting the Qur'an the right way, so your pronunciation stays correct as you memorise more.</p>
+        </div>
+        <div class="feature-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+          <h3>Tawheed</h3>
+          <p>You learn the core beliefs behind the words you memorise, explained in plain language for any age or background.</p>
+        </div>
+        <div class="feature-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4Z"/><path d="M17 8v9a3 3 0 0 0 3 3"/></svg>
+          <h3>Arabic language</h3>
+          <p>You learn to read Arabic and understand the basics, so the Qur'an becomes a text you understand, not just words you repeat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-ivory" id="countries" aria-labelledby="countries-h">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Built for students everywhere</span>
+        <h2 id="countries-h">No matter your time zone, there's a class time that works for you</h2>
+        <p>We already teach students in these countries. The clocks below update live, so you can see what time it is for each one right now.</p>
+      </div>
+      <div class="clock-grid" id="clockGrid" aria-label="Current local time by country" aria-live="off"></div>
+      <p class="clock-note">These are live local times, updated automatically. Canada covers more than one time zone, so we show Eastern Time as an example. Message us and we'll confirm the exact class time for your city.</p>
+    </div>
+  </section>
+
+  <section class="band-sand" id="schedule" aria-labelledby="schedule-h">
+    <div class="wrap">
+      <div class="schedule-panel">
+        <div>
+          <span class="eyebrow-tag" style="background:rgba(228,199,126,0.15); color:#E4C77E; border-color:rgba(228,199,126,0.35);">Weekly rhythm</span>
+          <h2 id="schedule-h">Four sessions a week, set around your day</h2>
+          <p>Classes run every Monday to Thursday. Our students live in different time zones, so we don't use one fixed time for everyone. Instead, each region gets a class time that fits its own day. Tell us your country, and we'll confirm your exact time.</p>
+        </div>
+        <div>
+          <div class="day-strip" role="list" aria-label="Weekly class days">
+            <span class="day-pill" role="listitem">Monday</span>
+            <span class="day-pill" role="listitem">Tuesday</span>
+            <span class="day-pill" role="listitem">Wednesday</span>
+            <span class="day-pill" role="listitem">Thursday</span>
+            <span class="day-pill off" role="listitem">Friday &ndash; rest</span>
+            <span class="day-pill off" role="listitem">Saturday &ndash; rest</span>
+            <span class="day-pill off" role="listitem">Sunday &ndash; rest</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-ivory" id="enroll" aria-labelledby="enroll-h">
+    <div class="wrap enroll-grid">
+      <div>
+        <span class="kicker">Enroll now</span>
+        <h2 id="enroll-h">Ready to start your memorisation journey?</h2>
+        <p style="color:#3B534E; max-width:52ch;">Message us on WhatsApp or call to register. We'll confirm your class time and add you to the group. You can also join the link below to sit in on a live class first.</p>
+        <div class="join-form-note" style="margin-top:1.6rem;">
+          <h3>How registration works</h3>
+          <p>Send us your name, your country, and the days that work for you. We'll reply with your confirmed weekly time and add you to the class link. There's no form to fill and no fee just to ask questions. Your first conversation with us is free.</p>
+        </div>
+      </div>
+      <div class="contact-card">
+        <h3 style="margin-top:0;">Contact the centre</h3>
+        <ul class="contact-list">
+          <li>
+            <a href="https://wa.me/2349035068375" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1 1 12 20Zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.4-.7-2.3-1.3-3.2-2.9-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5-.1-.1-.5-1.3-.7-1.8-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.5.5.2 1 .4 1.3.5.5.2 1 .1 1.4-.1.4-.2 1.4-.6 1.6-1.1.2-.5.2-.9.1-1Z"/></svg>
+              WhatsApp: 0903 506 8375
+            </a>
+          </li>
+          <li>
+            <a href="tel:+2347025442162">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.9 2Z"/></svg>
+              Call: 0702 544 2162
+            </a>
+          </li>
+          <li>
+            <a class="meet-link" href="https://meet.google.com/gad-xegz-yfk">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg>
+              Join class: meet.google.com/gad-xegz-yfk
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <span class="brand-text">Darul Qur'an Centre</span>
+        <p style="max-width:34ch; margin-top:0.6rem;">Online Tahfidhul Qur'an classes for students across the UK, Uganda, Ghana, Turkey, Morocco, Egypt, Nigeria, Canada and beyond.</p>
+      </div>
+      <div>
+        <p style="margin:0 0 0.4rem;"><a href="https://wa.me/2349035068375" target="_blank" rel="noopener">WhatsApp 0903 506 8375</a></p>
+        <p style="margin:0;"><a href="tel:+2347025442162">Call 0702 544 2162</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> Darul Qur'an Centre for Qur'an Memorization</span>
+      <span>Classes run Monday&ndash;Thursday, online</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile menu toggle
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('primaryNav');
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Live regional clocks
+  const regions = [
+    { name: 'Nigeria', tz: 'Africa/Lagos' },
+    { name: 'United Kingdom', tz: 'Europe/London' },
+    { name: 'Ghana', tz: 'Africa/Accra' },
+    { name: 'Uganda', tz: 'Africa/Kampala' },
+    { name: 'Turkey', tz: 'Europe/Istanbul' },
+    { name: 'Morocco', tz: 'Africa/Casablanca' },
+    { name: 'Egypt', tz: 'Africa/Cairo' },
+    { name: 'Canada (ET)', tz: 'America/Toronto' }
+  ];
+
+  const grid = document.getElementById('clockGrid');
+  grid.innerHTML = regions.map((r, i) => `
+    <div class="clock-card" data-tz="${r.tz}">
+      <span class="country">${r.name}</span>
+      <span class="time" id="time-${i}">--:--</span>
+      <span class="day" id="day-${i}"></span>
+    </div>
+  `).join('');
+
+  function updateClocks(){
+    regions.forEach((r, i) => {
+      const now = new Date();
+      const timeStr = new Intl.DateTimeFormat('en-GB', {
+        hour: '2-digit', minute: '2-digit', timeZone: r.tz
+      }).format(now);
+      const dayStr = new Intl.DateTimeFormat('en-GB', {
+        weekday: 'long', timeZone: r.tz
+      }).format(now);
+      const timeEl = document.getElementById('time-' + i);
+      const dayEl = document.getElementById('day-' + i);
+      if (timeEl) timeEl.textContent = timeStr;
+      if (dayEl) dayEl.textContent = dayStr;
+    });
+  }
+  updateClocks();
+  setInterval(updateClocks, 30000);
+</script>
+
+</body>
+</html>
